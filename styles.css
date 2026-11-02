@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+
 @layer reset, base, layout, components, utilities, overrides;
 
 @layer reset {
@@ -10,30 +13,197 @@
   body {
     margin: 0;
   }
+
+  a {
+  text-decoration: none;
+  color: inherit;
+  }
 }
 
 @layer base {
   :root {
     /* Add design tokens here. */
+    /* colors */
+    --color-primary: #FF0017;
+    --color-text: #29140C;
+    --color-background: #FFF3C4; 
+    --color-white: #ffffff;
+
+
+    /* type */
+    --body-font: 'raleway', sans-serif; 
+    --font-weight-light: 300;
+    --font-weight-bold: 700;
+    --accent-font: 'Momo Trust Display';
+
+
+    /* spacing */ 
+    --gutter: 20px;
+    --spacing: 0.5em;
+    --bottom: 2.5em;
+    
+    
+    /* shape */
+    --radius-small: 8px; 
+    --radius-big: 16px;
+    
+
+    /* focus */
+	  --box-shadow-sm: 3px 3px 7px grey;
   }
+    
+    /* Any button over which the user's pointer is hovering */
+
+    
 
   body {
-    font-family: Arial, Helvetica, sans-serif;
+    
+    font-family: var(--body-font);
+    font-weight: var(--font-weight-light);
     line-height: 1.5;
+    color: var(--color-text);
+    background-color: var(--color-background);
+  }
+  .site-logo{
+    font-family: var(--body-font);
+    font-weight: var(--font-weight-bold);
+    font-size: 3em;
   }
 
-  img,
-  svg {
+  p {
+    margin: 0 auto var(--bottom);
+    text-align: center;
+    padding: 0 3.5em 1em;
+
+  }
+
+  section {
+    margin-top: 0;
+    margin-bottom: var(--bottom);
+    padding: 0.5em 4em;
+  }
+
+  h1 {
+    font-family: var(--body-font);
+    font-size: 2em;
+    font-weight: var(--font-weight-bold);
+    margin: 0;
+  }
+
+  h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+  }
+
+  .eyebrow {
+    font-size: 0.75em;
+    font-family: var(--accent-font);
+    color: var(--color--text);
+    margin-top: 2em;
+    margin-bottom: 0;
+    text-align: left;
+  }
+
+img, svg {
     max-width: 100%;
+  }
+  footer {
+    font-family: var(--accent-font);
+    margin: 0 auto;
+    color: var(--color-background);
+    background-color: var(--color-text);
+    vertical-align: baseline;
+    padding: var(--spacing);
   }
 }
 
 @layer layout {
   /* Add page-level layout and composition classes here. */
+  header {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr;
+  }
+
+  nav ul {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2em;
+  list-style: none;
+  }
+  
+  nav a {
+	display: inline-block;
+	padding: 1rem;
+  background-color: var(--color-white); 
+  border-radius:.5rem;
+  max-width: 7rem;
+  font-family: var(--accent-font);
+  color: var(--color-text);
+  text-align:center;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-column: auto;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 0;
+    column-gap: var(--gutter);
+  }
+
+  
 }
 
 @layer components {
   /* Add reusable components such as buttons, cards, callouts, and forms here. */
+
+  /* buttons */
+  main a, button {
+    
+    background-color: var(--color-white);
+    font-size: 0.8em;
+    color: var(--color-text);
+    bottom: 0;
+    right: 0;
+    padding: 0.7em 2em;
+    margin: 2em 1em;
+    font-family: var(--accent-font);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-big);
+  }
+
+
+  /* cards */
+  .card, form {
+    background-color: var(--color-white);
+    color: var(--color-text);
+    border: 3px solid var(--color-text);
+    margin: var(--gutter) 0;
+    padding: 1em;
+    position: relative;
+    border-radius: var(--radius-small);
+  }
+
+  .card a {
+    position: absolute;
+  }
+  
+  
+  /* callouts */
+
+  .callout {
+    border-radius: var(--radius-big);
+    background-color: var(--color-white);
+  }
+
+  /* forms */
+  
+  label {
+  display: block;
+  margin-top: 1em;
+  }
+
+
+
 }
 
 @layer utilities {
@@ -46,12 +216,51 @@
     white-space: nowrap;
     clip-path: inset(50%);
   }
+  
+  /* focus */
+  input:focus-visible {
+  outline: 2px solid var(--color-text);
+  border-radius: var(--radius-big);
+  box-shadow: var(--box-shadow-sm);
+  }
+
+  select:focus-visible {
+  border: 2px dashed var(--color-text);
+  border-radius: 3px;
+  outline: none;
+  box-shadow: var(--box-shadow-sm);
+}
+  /* hover */
+  a:hover, button:hover {
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  }
+
+    /* active */
+  a:active, button:active {
+  transform: scale(0.85);
+  }
+  
 }
 
 @layer overrides {
   /* Keep this layer small. Use it only for intentional exceptions. */
+
+  .button {
+  display: block;
+  width: 300px;
+  justify-items: center;
+  }
 }
+  
+
 
 @media print {
   /* Add print improvements here. */
+  #header,
+  #footer,
+  #nav {
+    display: none !important;
+  }
 }
+
